@@ -67,6 +67,7 @@
             }
         }
 
+
         public void FileDecryptEncrypt(string filePath)
         {
             byte[] bytes2 = null;
@@ -215,6 +216,60 @@
             }
             e.Effect = ee;
         }
+
+        private string selectedFolderPath;
+
+        private void btnBrowseFolder_Click(object sender, EventArgs e)
+        {
+            using FolderBrowserDialog folderBrowserDialog = new();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedFolderPath = folderBrowserDialog.SelectedPath;
+                tbBrowseFolder.Text = selectedFolderPath;
+            }
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(selectedFolderPath))
+            {
+                RunCrypt(selectedFolderPath);
+            }
+            else
+            {
+                MessageBox.Show("Please select a folder before starting.", "Folder Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void RunCrypt(string folderPath)
+        {
+            if (!runing)
+            {
+                cancellationTokenSource = new CancellationTokenSource();
+                thread = new Thread(() => RuningThread(cancellationTokenSource.Token, folderPath));
+                repSting2 = cbxRepString2.Checked;
+                isEncrypt = rbtnEn.Checked;
+                cType = (CryptType)cbxType.SelectedIndex;
+                thread.Start();
+            }
+        }
+
+        private void RuningThread(CancellationToken cancellationToken, string folderPath)
+        {
+            string[] files = Directory.GetFiles(folderPath);
+
+            foreach (string path in files)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                    break;
+
+                FileDecryptEncrypt(path);
+            }
+
+            runing = false;
+            thread = null;
+        }
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {

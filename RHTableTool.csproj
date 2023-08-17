@@ -9,8 +9,8 @@
     <AssemblyName>RH Table Tool</AssemblyName>
     <Authors>JuniorDark</Authors>
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="6.2.6" />
+    <PackageReference Include="EPPlus" Version="6.2.8" />
   </ItemGroup>
 
 </Project>
