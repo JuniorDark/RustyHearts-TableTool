@@ -32,28 +32,32 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             txtFile = new TextBox();
             groupBox1 = new GroupBox();
+            btnStart = new Button();
             btnOpenDir = new Button();
             btnStop = new Button();
             btnClear = new Button();
             cbxRepString2 = new CheckBox();
             cbxType = new ComboBox();
-            label1 = new Label();
+            lbFileType = new Label();
             rbtnDe = new RadioButton();
             rbtnEn = new RadioButton();
             label2 = new Label();
             toolTip1 = new ToolTip(components);
+            btnBrowseFolder = new Button();
+            tbBrowseFolder = new TextBox();
+            lbFolder = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // txtFile
             // 
             txtFile.AllowDrop = true;
-            txtFile.Location = new Point(12, 38);
+            txtFile.Location = new Point(12, 69);
             txtFile.Multiline = true;
             txtFile.Name = "txtFile";
             txtFile.ReadOnly = true;
             txtFile.ScrollBars = ScrollBars.Both;
-            txtFile.Size = new Size(500, 223);
+            txtFile.Size = new Size(579, 201);
             txtFile.TabIndex = 0;
             txtFile.WordWrap = false;
             txtFile.DragDrop += txtFile_DragDrop;
@@ -61,24 +65,36 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnStart);
             groupBox1.Controls.Add(btnOpenDir);
             groupBox1.Controls.Add(btnStop);
             groupBox1.Controls.Add(btnClear);
             groupBox1.Controls.Add(cbxRepString2);
             groupBox1.Controls.Add(cbxType);
-            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(lbFileType);
             groupBox1.Controls.Add(rbtnDe);
             groupBox1.Controls.Add(rbtnEn);
             groupBox1.Location = new Point(12, 276);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(506, 108);
+            groupBox1.Size = new Size(579, 108);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Decryption";
             // 
+            // btnStart
+            // 
+            btnStart.Location = new Point(245, 28);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(75, 58);
+            btnStart.TabIndex = 8;
+            btnStart.Text = "Start";
+            toolTip1.SetToolTip(btnStart, "Process the selected files on the selected path");
+            btnStart.UseVisualStyleBackColor = true;
+            btnStart.Click += btnStart_Click;
+            // 
             // btnOpenDir
             // 
-            btnOpenDir.Location = new Point(416, 28);
+            btnOpenDir.Location = new Point(494, 28);
             btnOpenDir.Name = "btnOpenDir";
             btnOpenDir.Size = new Size(75, 58);
             btnOpenDir.TabIndex = 7;
@@ -88,7 +104,7 @@
             // 
             // btnStop
             // 
-            btnStop.Location = new Point(326, 28);
+            btnStop.Location = new Point(327, 28);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(75, 58);
             btnStop.TabIndex = 6;
@@ -98,7 +114,7 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(233, 28);
+            btnClear.Location = new Point(410, 28);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(75, 58);
             btnClear.TabIndex = 5;
@@ -127,14 +143,14 @@
             cbxType.Size = new Size(54, 23);
             cbxType.TabIndex = 3;
             // 
-            // label1
+            // lbFileType
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(104, 31);
-            label1.Name = "label1";
-            label1.Size = new Size(55, 15);
-            label1.TabIndex = 2;
-            label1.Text = "File Type:";
+            lbFileType.AutoSize = true;
+            lbFileType.Location = new Point(104, 31);
+            lbFileType.Name = "lbFileType";
+            lbFileType.Size = new Size(55, 15);
+            lbFileType.TabIndex = 2;
+            lbFileType.Text = "File Type:";
             // 
             // rbtnDe
             // 
@@ -161,17 +177,47 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 13);
+            label2.Location = new Point(12, 51);
             label2.Name = "label2";
             label2.Size = new Size(194, 15);
             label2.TabIndex = 2;
             label2.Text = "Drag files/folders in the box bellow:";
             // 
+            // btnBrowseFolder
+            // 
+            btnBrowseFolder.Location = new Point(443, 12);
+            btnBrowseFolder.Name = "btnBrowseFolder";
+            btnBrowseFolder.Size = new Size(69, 23);
+            btnBrowseFolder.TabIndex = 3;
+            btnBrowseFolder.Text = "Browse";
+            btnBrowseFolder.UseVisualStyleBackColor = true;
+            btnBrowseFolder.Click += btnBrowseFolder_Click;
+            // 
+            // tbBrowseFolder
+            // 
+            tbBrowseFolder.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            tbBrowseFolder.Location = new Point(92, 12);
+            tbBrowseFolder.Name = "tbBrowseFolder";
+            tbBrowseFolder.Size = new Size(345, 22);
+            tbBrowseFolder.TabIndex = 4;
+            // 
+            // lbFolder
+            // 
+            lbFolder.AutoSize = true;
+            lbFolder.Location = new Point(12, 15);
+            lbFolder.Name = "lbFolder";
+            lbFolder.Size = new Size(74, 15);
+            lbFolder.TabIndex = 5;
+            lbFolder.Text = "Select Folder";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(520, 387);
+            ClientSize = new Size(599, 387);
+            Controls.Add(lbFolder);
+            Controls.Add(tbBrowseFolder);
+            Controls.Add(btnBrowseFolder);
             Controls.Add(label2);
             Controls.Add(groupBox1);
             Controls.Add(txtFile);
@@ -197,10 +243,14 @@
         private Button btnClear;
         private CheckBox cbxRepString2;
         private ComboBox cbxType;
-        private Label label1;
+        private Label lbFileType;
         private RadioButton rbtnDe;
         private RadioButton rbtnEn;
         private Label label2;
         private ToolTip toolTip1;
+        private Button btnBrowseFolder;
+        private TextBox tbBrowseFolder;
+        private Label lbFolder;
+        private Button btnStart;
     }
 }
