@@ -19,7 +19,7 @@ jobs:
         run: Compress-Archive -Path "./bin/Release/net7.0-windows/win-x86/publish/RH Table Tool.exe" -DestinationPath RH_Table_Tool.zip
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: RH Table Tool
           path: RH_Table_Tool.zip
