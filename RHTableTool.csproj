@@ -9,8 +9,8 @@
     <AssemblyName>RH Table Tool</AssemblyName>
     <Authors>JuniorDark</Authors>
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
+    <AssemblyVersion>2.1.0</AssemblyVersion>
+    <FileVersion>2.1.0</FileVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
