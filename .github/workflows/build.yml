@@ -23,7 +23,7 @@ jobs:
       - name: Zip output files (No Self-Contained)
         run: Compress-Archive -Path "./publish/RustyHearts-TableTool_framework-dependent" -DestinationPath RustyHearts-TableTool.zip
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: RustyHearts-TableTool
           path: RustyHearts-TableTool.zip
